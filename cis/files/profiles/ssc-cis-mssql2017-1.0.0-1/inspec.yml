@@ -1,0 +1,26 @@
+name: ssc-cis-mssql2017-1.0.0-1
+title: CIS Microsoft SQL Server 2017 Benchmark
+maintainer: InSpec Compliance Team
+copyright: Copyright 2024
+license: Apache-2.0
+summary: InSpec profile for CIS Microsoft SQL Server 2017 compliance with NIST SP 800-53 mappings. CIS Benchmark Version v1.3.0.
+version: 2.0.0
+inspec_version: ">= 5.0"
+
+inputs:
+  - name: usernm
+    description: MSSQL username (optional for Windows Auth)
+    required: false
+  - name: passwd
+    description: MSSQL password (optional for Windows Auth)
+    sensitive: true
+    required: false
+  - name: hostnm
+    description: MSSQL host address
+    value: localhost
+  - name: port
+    description: MSSQL port
+    value: 1433
+  - name: servicenm
+    description: MSSQL service/instance name (optional)
+    required: false

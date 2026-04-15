@@ -1,0 +1,35 @@
+name: ssc-cis-postgres15-1.0.0-1
+title: CIS PostgreSQL 15 Benchmark
+maintainer: InSpec Compliance Team
+copyright: Copyright 2024
+license: Apache-2.0
+summary: InSpec profile for CIS PostgreSQL 15 compliance
+version: 1.0.0
+inspec_version: ">= 5.0"
+
+inputs:
+  - name: usernm
+    description: PostgreSQL username for authentication
+    type: string
+    required: true
+
+  - name: passwd
+    description: PostgreSQL password for authentication
+    type: string
+    required: true
+    sensitive: true
+
+  - name: hostnm
+    description: PostgreSQL server hostname or IP address
+    type: string
+    required: true
+
+  - name: port
+    description: PostgreSQL server port
+    type: numeric
+    value: 5432
+
+  - name: database
+    description: PostgreSQL database name
+    type: string
+    value: postgres

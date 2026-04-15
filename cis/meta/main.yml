@@ -1,0 +1,21 @@
+---
+galaxy_info:
+  role_name: cis
+  namespace: inspec_cis_database
+  author: InSpec Compliance Team
+  description: >-
+    CIS InSpec database compliance profiles for MSSQL, Oracle, Sybase, and PostgreSQL.
+    This role stores InSpec controls that perform CIS checks against database systems.
+    The profiles are imported via requirements.yml in the execution repository.
+  license: Apache-2.0
+  min_ansible_version: "2.14"
+  platforms: []
+  galaxy_tags:
+    - inspec
+    - compliance
+    - cis
+    - database
+    - mssql
+    - oracle
+    - sybase
+    - postgresql

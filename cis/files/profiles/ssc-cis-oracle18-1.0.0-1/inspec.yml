@@ -1,0 +1,40 @@
+name: ssc-cis-oracle18-1.0.0-1
+title: CIS Oracle Database 18c Compliance
+maintainer: InSpec Compliance Team
+copyright: Copyright 2024
+license: Apache-2.0
+summary: InSpec profile for CIS Oracle Database 18c compliance. CIS Benchmark Version v1.1.0.
+version: 1.0.0
+inspec_version: ">= 5.0"
+
+inputs:
+  - name: usernm
+    description: Oracle username for authentication
+    type: string
+    required: true
+
+  - name: passwd
+    description: Oracle password for authentication
+    type: string
+    required: true
+    sensitive: true
+
+  - name: hostnm
+    description: Oracle database server hostname or IP address
+    type: string
+    required: true
+
+  - name: port
+    description: Oracle database listener port
+    type: numeric
+    value: 1521
+
+  - name: servicenm
+    description: Oracle service name or SID
+    type: string
+    required: true
+
+  - name: tns_alias
+    description: TNS alias for connection (optional, used when oracle_use_tns is enabled)
+    type: string
+    required: false
