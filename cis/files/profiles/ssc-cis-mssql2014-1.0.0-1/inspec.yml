@@ -3,8 +3,8 @@ title: MSSQL 2014 CIS Compliance
 maintainer: DevOps Team
 copyright: Internal
 license: Proprietary
-summary: MSSQL 2014 CIS Benchmark compliance controls
-version: 3.0.0
+summary: InSpec profile for CIS Microsoft SQL Server 2014 compliance. CIS Benchmark Version v1.5.0.
+version: 1.5.0
 inspec_version: ">= 5.0"
 
 inputs:
