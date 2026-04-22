@@ -1,6 +1,6 @@
-# Oracle 18c InSpec Controls - trusted.rb
-# CIS Oracle Database 18c Benchmark v1.0.0
-# Profile version: 1.0.0 (see inspec.yml)
+# Oracle 23c InSpec Controls - trusted.rb
+# CIS Oracle Database 23c Benchmark v1.1.0
+# Profile version: 1.1.0 (see inspec.yml)
 #
 # Uses native oracledb_session resource for scalable multi-database scanning
 # Password is passed via input and handled securely by InSpec

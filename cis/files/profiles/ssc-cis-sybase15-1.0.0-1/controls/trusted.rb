@@ -1,7 +1,6 @@
-# Sybase ASE 15 InSpec Control - trusted.rb
-# CIS SAP ASE 15.x Benchmark v1.1.0
-# Version: 3.0.0
-# Date: 2026-02-08
+# Sybase ASE 15 InSpec Controls - trusted.rb
+# CIS SAP ASE 15.x Benchmark v1.0.0
+# Profile version: 1.0.0 (see inspec.yml)
 #
 # Uses native sybase_session resource for scalable multi-database scanning
 # Password is passed via input and handled securely by InSpec
