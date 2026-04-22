@@ -1,6 +1,6 @@
-# PostgreSQL 15 InSpec Controls - CIS PostgreSQL 15 Benchmark v1.0.0
-# Version: 3.0.0
-# Last Updated: 2026-02-08
+# PostgreSQL 15 InSpec Controls - trusted.rb
+# CIS PostgreSQL 15 Benchmark v1.0.0
+# Profile version: 1.0.0 (see inspec.yml)
 #
 # This profile implements CIS PostgreSQL 15 Benchmark controls
 # for compliance reporting.

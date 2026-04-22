@@ -1,6 +1,6 @@
-# Oracle 18c InSpec Controls - trusted.rb
-# CIS Oracle Database 18c Benchmark v1.0.0
-# Profile version: 1.0.0 (see inspec.yml)
+# Oracle 12c InSpec Controls - trusted.rb
+# CIS Oracle Database 12c Benchmark v3.0.0
+# Profile version: 3.0.0 (see inspec.yml)
 #
 # Uses native oracledb_session resource for scalable multi-database scanning
 # Password is passed via input and handled securely by InSpec
@@ -8,7 +8,7 @@
 # NOTE: Oracle sqlplus may return values with leading whitespace/tabs.
 # All numeric comparisons use .to_s.strip to handle this.
 
-title 'CIS Oracle Database 19c Security Compliance Controls'
+title 'CIS Oracle Database 12c Security Compliance Controls'
 
 sql = oracledb_session(
   user: input('usernm'),
@@ -25,9 +25,10 @@ end
 
 # ==============================================================================
 # Section 1: Installation and Configuration
+# CIS Oracle Database 12c Benchmark - Installation and Patches
 # ==============================================================================
 
-control 'oracle-19c-1.01' do
+control 'oracle-12c-1.01' do
   impact 1.0
   title 'Ensure Oracle database version is supported'
   desc 'Running a supported Oracle database version ensures security patches are available.'
@@ -40,7 +41,7 @@ control 'oracle-19c-1.01' do
   end
 end
 
-control 'oracle-19c-1.02' do
+control 'oracle-12c-1.02' do
   impact 1.0
   title 'Ensure SPFILE is in use'
   desc 'Using SPFILE ensures persistent parameter changes and auditable configuration.'
@@ -54,7 +55,7 @@ control 'oracle-19c-1.02' do
   end
 end
 
-control 'oracle-19c-1.03' do
+control 'oracle-12c-1.03' do
   impact 0.7
   title 'Ensure AUDIT_FILE_DEST is set appropriately'
   desc 'Audit file destination should be on a separate filesystem with proper permissions.'
@@ -68,7 +69,7 @@ control 'oracle-19c-1.03' do
   end
 end
 
-control 'oracle-19c-1.04' do
+control 'oracle-12c-1.04' do
   impact 0.8
   title 'Ensure REMOTE_LOGIN_PASSWORDFILE is set to EXCLUSIVE'
   desc 'EXCLUSIVE mode ensures password file is used only by one database.'
@@ -81,7 +82,7 @@ control 'oracle-19c-1.04' do
   end
 end
 
-control 'oracle-19c-1.05' do
+control 'oracle-12c-1.05' do
   impact 0.7
   title 'Ensure SQL92_SECURITY is enabled'
   desc 'SQL92 security enforces additional column-level security checks.'
@@ -94,7 +95,7 @@ control 'oracle-19c-1.05' do
   end
 end
 
-control 'oracle-19c-1.06' do
+control 'oracle-12c-1.06' do
   impact 0.8
   title 'Ensure users do not use SYSTEM tablespace as default'
   desc 'User data should not reside in SYSTEM tablespace to prevent space exhaustion.'
@@ -107,7 +108,7 @@ control 'oracle-19c-1.06' do
   end
 end
 
-control 'oracle-19c-1.07' do
+control 'oracle-12c-1.07' do
   impact 0.7
   title 'Ensure control files are multiplexed'
   desc 'Multiple control files protect against data loss from single point of failure.'
@@ -120,7 +121,7 @@ control 'oracle-19c-1.07' do
   end
 end
 
-control 'oracle-19c-1.08' do
+control 'oracle-12c-1.08' do
   impact 0.7
   title 'Ensure redo logs are multiplexed'
   desc 'Multiple redo log members protect against data loss.'
@@ -133,7 +134,7 @@ control 'oracle-19c-1.08' do
   end
 end
 
-control 'oracle-19c-1.09' do
+control 'oracle-12c-1.09' do
   impact 1.0
   title 'Ensure AUDIT_SYS_OPERATIONS is enabled'
   desc 'Auditing SYS operations provides accountability for privileged users.'
@@ -146,12 +147,12 @@ control 'oracle-19c-1.09' do
   end
 end
 
-control 'oracle-19c-1.10' do
+control 'oracle-12c-1.10' do
   impact 0.7
   title 'Ensure GLOBAL_NAMES is enabled'
   desc 'Forces database links to have the same name as the remote database.'
   tag cis: '1.10'
-  tag cis_level: 1
+  tag cis_level: 2
   tag severity: 'high'
 
   describe sql.query("SELECT value FROM v$parameter WHERE name = 'global_names'").row(0).column('value') do
@@ -159,7 +160,7 @@ control 'oracle-19c-1.10' do
   end
 end
 
-control 'oracle-19c-1.11' do
+control 'oracle-12c-1.11' do
   impact 1.0
   title 'Ensure O7_DICTIONARY_ACCESSIBILITY is disabled'
   desc 'Prevents users with ANY privilege from accessing SYS schema objects.'
@@ -172,7 +173,7 @@ control 'oracle-19c-1.11' do
   end
 end
 
-control 'oracle-19c-1.12' do
+control 'oracle-12c-1.12' do
   impact 1.0
   title 'Ensure OS_ROLES is disabled'
   desc 'Disabling OS roles prevents operating system from managing database roles.'
@@ -185,7 +186,7 @@ control 'oracle-19c-1.12' do
   end
 end
 
-control 'oracle-19c-1.13' do
+control 'oracle-12c-1.13' do
   impact 1.0
   title 'Ensure REMOTE_LISTENER is empty or properly configured'
   desc 'Remote listener allows network connections which may be exploited if misconfigured.'
@@ -198,7 +199,7 @@ control 'oracle-19c-1.13' do
   end
 end
 
-control 'oracle-19c-1.14' do
+control 'oracle-12c-1.14' do
   impact 1.0
   title 'Ensure REMOTE_OS_AUTHENT is disabled'
   desc 'Prevents remote OS authentication which can be spoofed.'
@@ -211,7 +212,7 @@ control 'oracle-19c-1.14' do
   end
 end
 
-control 'oracle-19c-1.15' do
+control 'oracle-12c-1.15' do
   impact 1.0
   title 'Ensure REMOTE_OS_ROLES is disabled'
   desc 'Prevents remote operating system roles from being used.'
@@ -224,7 +225,7 @@ control 'oracle-19c-1.15' do
   end
 end
 
-control 'oracle-19c-1.16' do
+control 'oracle-12c-1.16' do
   impact 1.0
   title 'Ensure UTL_FILE_DIR is empty'
   desc 'UTL_FILE_DIR allows file system access which can be dangerous.'
@@ -237,7 +238,7 @@ control 'oracle-19c-1.16' do
   end
 end
 
-control 'oracle-19c-1.17' do
+control 'oracle-12c-1.17' do
   impact 0.5
   title 'Ensure SEC_RETURN_SERVER_RELEASE_BANNER is disabled'
   desc 'Prevents detailed version information from being returned to clients.'
@@ -250,7 +251,7 @@ control 'oracle-19c-1.17' do
   end
 end
 
-control 'oracle-19c-1.18' do
+control 'oracle-12c-1.18' do
   impact 0.7
   title 'Ensure RESOURCE_LIMIT is enabled'
   desc 'Enables enforcement of resource limits set in profiles.'
@@ -265,9 +266,10 @@ end
 
 # ==============================================================================
 # Section 2: User Account Management
+# CIS Oracle Database 12c Benchmark - User Accounts
 # ==============================================================================
 
-control 'oracle-19c-2.01' do
+control 'oracle-12c-2.01' do
   impact 1.0
   title 'Ensure default sample schema users are locked'
   desc 'Default Oracle sample schema users should be locked for security.'
@@ -280,7 +282,7 @@ control 'oracle-19c-2.01' do
   end
 end
 
-control 'oracle-19c-2.02' do
+control 'oracle-12c-2.02' do
   impact 1.0
   title 'Ensure DBSNMP account is locked'
   desc 'DBSNMP account should be locked if Enterprise Manager is not in use.'
@@ -293,7 +295,7 @@ control 'oracle-19c-2.02' do
   end
 end
 
-control 'oracle-19c-2.03' do
+control 'oracle-12c-2.03' do
   impact 0.8
   title 'Ensure XDB account is locked'
   desc 'XDB account should be locked if XML DB is not required.'
@@ -306,7 +308,7 @@ control 'oracle-19c-2.03' do
   end
 end
 
-control 'oracle-19c-2.04' do
+control 'oracle-12c-2.04' do
   impact 0.8
   title 'Ensure ANONYMOUS account is locked'
   desc 'ANONYMOUS account provides unauthenticated access and should be locked.'
@@ -319,7 +321,7 @@ control 'oracle-19c-2.04' do
   end
 end
 
-control 'oracle-19c-2.05' do
+control 'oracle-12c-2.05' do
   impact 1.0
   title 'Ensure no users have default passwords'
   desc 'Users with default passwords are vulnerable to unauthorized access.'
@@ -332,7 +334,7 @@ control 'oracle-19c-2.05' do
   end
 end
 
-control 'oracle-19c-2.06' do
+control 'oracle-12c-2.06' do
   impact 0.8
   title 'Ensure CTXSYS account is locked'
   desc 'CTXSYS account should be locked if Oracle Text is not required.'
@@ -345,7 +347,7 @@ control 'oracle-19c-2.06' do
   end
 end
 
-control 'oracle-19c-2.07' do
+control 'oracle-12c-2.07' do
   impact 0.8
   title 'Ensure MDSYS account is locked'
   desc 'MDSYS account should be locked if Oracle Spatial is not required.'
@@ -358,7 +360,7 @@ control 'oracle-19c-2.07' do
   end
 end
 
-control 'oracle-19c-2.08' do
+control 'oracle-12c-2.08' do
   impact 0.8
   title 'Ensure OLAPSYS account is locked'
   desc 'OLAPSYS account should be locked if OLAP is not required.'
@@ -371,7 +373,7 @@ control 'oracle-19c-2.08' do
   end
 end
 
-control 'oracle-19c-2.09' do
+control 'oracle-12c-2.09' do
   impact 0.8
   title 'Ensure ORDDATA account is locked'
   desc 'ORDDATA account should be locked if Oracle Multimedia is not required.'
@@ -384,7 +386,7 @@ control 'oracle-19c-2.09' do
   end
 end
 
-control 'oracle-19c-2.10' do
+control 'oracle-12c-2.10' do
   impact 0.8
   title 'Ensure ORDSYS account is locked'
   desc 'ORDSYS account should be locked if Oracle Multimedia is not required.'
@@ -397,7 +399,7 @@ control 'oracle-19c-2.10' do
   end
 end
 
-control 'oracle-19c-2.11' do
+control 'oracle-12c-2.11' do
   impact 0.8
   title 'Ensure OUTLN account is locked'
   desc 'OUTLN account should be locked if stored outlines are not used.'
@@ -410,7 +412,7 @@ control 'oracle-19c-2.11' do
   end
 end
 
-control 'oracle-19c-2.12' do
+control 'oracle-12c-2.12' do
   impact 0.8
   title 'Ensure WMSYS account is locked'
   desc 'WMSYS account should be locked if Workspace Manager is not required.'
@@ -423,7 +425,7 @@ control 'oracle-19c-2.12' do
   end
 end
 
-control 'oracle-19c-2.13' do
+control 'oracle-12c-2.13' do
   impact 0.8
   title 'Ensure LBACSYS account is locked'
   desc 'LBACSYS account should be locked if Label Security is not required.'
@@ -436,12 +438,12 @@ control 'oracle-19c-2.13' do
   end
 end
 
-control 'oracle-19c-2.14' do
+control 'oracle-12c-2.14' do
   impact 0.7
   title 'Ensure proxy user authentication is properly configured'
   desc 'Proxy users should be minimized and properly authorized.'
   tag cis: '2.14'
-  tag cis_level: 1
+  tag cis_level: 2
   tag severity: 'high'
 
   describe sql.query("SELECT TRIM(COUNT(*)) AS cnt FROM proxy_users").row(0).column('cnt') do
@@ -449,7 +451,7 @@ control 'oracle-19c-2.14' do
   end
 end
 
-control 'oracle-19c-2.15' do
+control 'oracle-12c-2.15' do
   impact 0.8
   title 'Ensure no users have unlimited tablespace quota'
   desc 'Unlimited quotas can lead to denial of service.'
@@ -464,9 +466,10 @@ end
 
 # ==============================================================================
 # Section 3: Privilege Management
+# CIS Oracle Database 12c Benchmark - Privileges and Roles
 # ==============================================================================
 
-control 'oracle-19c-3.01' do
+control 'oracle-12c-3.01' do
   impact 1.0
   title 'Ensure EXECUTE on UTL_FILE is revoked from PUBLIC'
   desc 'UTL_FILE allows file system access and should not be granted to PUBLIC.'
@@ -479,7 +482,7 @@ control 'oracle-19c-3.01' do
   end
 end
 
-control 'oracle-19c-3.02' do
+control 'oracle-12c-3.02' do
   impact 1.0
   title 'Ensure EXECUTE on UTL_HTTP is revoked from PUBLIC'
   desc 'UTL_HTTP allows HTTP calls and should not be granted to PUBLIC.'
@@ -492,7 +495,7 @@ control 'oracle-19c-3.02' do
   end
 end
 
-control 'oracle-19c-3.03' do
+control 'oracle-12c-3.03' do
   impact 1.0
   title 'Ensure EXECUTE on UTL_TCP is revoked from PUBLIC'
   desc 'UTL_TCP allows TCP connections and should not be granted to PUBLIC.'
@@ -505,7 +508,7 @@ control 'oracle-19c-3.03' do
   end
 end
 
-control 'oracle-19c-3.04' do
+control 'oracle-12c-3.04' do
   impact 1.0
   title 'Ensure EXECUTE on UTL_SMTP is revoked from PUBLIC'
   desc 'UTL_SMTP allows email sending and should not be granted to PUBLIC.'
@@ -518,7 +521,7 @@ control 'oracle-19c-3.04' do
   end
 end
 
-control 'oracle-19c-3.05' do
+control 'oracle-12c-3.05' do
   impact 0.8
   title 'Ensure EXECUTE on DBMS_LOB is revoked from PUBLIC'
   desc 'DBMS_LOB allows large object manipulation and should not be granted to PUBLIC.'
@@ -531,7 +534,7 @@ control 'oracle-19c-3.05' do
   end
 end
 
-control 'oracle-19c-3.06' do
+control 'oracle-12c-3.06' do
   impact 1.0
   title 'Ensure EXECUTE on DBMS_SQL is revoked from PUBLIC'
   desc 'DBMS_SQL allows dynamic SQL execution and should not be granted to PUBLIC.'
@@ -544,12 +547,12 @@ control 'oracle-19c-3.06' do
   end
 end
 
-control 'oracle-19c-3.07' do
+control 'oracle-12c-3.07' do
   impact 0.8
   title 'Ensure EXECUTE on DBMS_RANDOM is revoked from PUBLIC'
   desc 'DBMS_RANDOM should be restricted to prevent misuse.'
   tag cis: '3.7'
-  tag cis_level: 1
+  tag cis_level: 2
   tag severity: 'high'
 
   describe sql.query("SELECT TRIM(COUNT(*)) AS cnt FROM dba_tab_privs WHERE grantee = 'PUBLIC' AND privilege = 'EXECUTE' AND table_name = 'DBMS_RANDOM'").row(0).column('cnt') do
@@ -557,12 +560,12 @@ control 'oracle-19c-3.07' do
   end
 end
 
-control 'oracle-19c-3.08' do
+control 'oracle-12c-3.08' do
   impact 0.8
   title 'Ensure EXECUTE on DBMS_XMLGEN is revoked from PUBLIC'
   desc 'DBMS_XMLGEN can expose data and should not be granted to PUBLIC.'
   tag cis: '3.8'
-  tag cis_level: 1
+  tag cis_level: 2
   tag severity: 'high'
 
   describe sql.query("SELECT TRIM(COUNT(*)) AS cnt FROM dba_tab_privs WHERE grantee = 'PUBLIC' AND privilege = 'EXECUTE' AND table_name = 'DBMS_XMLGEN'").row(0).column('cnt') do
@@ -570,7 +573,7 @@ control 'oracle-19c-3.08' do
   end
 end
 
-control 'oracle-19c-3.09' do
+control 'oracle-12c-3.09' do
   impact 0.8
   title 'Ensure EXECUTE on DBMS_JOB is revoked from PUBLIC'
   desc 'DBMS_JOB can be used to schedule malicious code.'
@@ -583,7 +586,7 @@ control 'oracle-19c-3.09' do
   end
 end
 
-control 'oracle-19c-3.10' do
+control 'oracle-12c-3.10' do
   impact 0.8
   title 'Ensure EXECUTE on DBMS_SCHEDULER is revoked from PUBLIC'
   desc 'DBMS_SCHEDULER can be used to schedule malicious code.'
@@ -596,7 +599,7 @@ control 'oracle-19c-3.10' do
   end
 end
 
-control 'oracle-19c-3.11' do
+control 'oracle-12c-3.11' do
   impact 1.0
   title 'Ensure EXECUTE on DBMS_SYS_SQL is revoked from PUBLIC'
   desc 'DBMS_SYS_SQL can execute SQL as another user.'
@@ -609,7 +612,7 @@ control 'oracle-19c-3.11' do
   end
 end
 
-control 'oracle-19c-3.12' do
+control 'oracle-12c-3.12' do
   impact 0.8
   title 'Ensure EXECUTE on DBMS_BACKUP_RESTORE is revoked from PUBLIC'
   desc 'DBMS_BACKUP_RESTORE can be used to access backup data.'
@@ -622,7 +625,7 @@ control 'oracle-19c-3.12' do
   end
 end
 
-control 'oracle-19c-3.13' do
+control 'oracle-12c-3.13' do
   impact 0.8
   title 'Ensure EXECUTE on UTL_MAIL is revoked from PUBLIC'
   desc 'UTL_MAIL can be used for unauthorized email sending.'
@@ -635,7 +638,7 @@ control 'oracle-19c-3.13' do
   end
 end
 
-control 'oracle-19c-3.14' do
+control 'oracle-12c-3.14' do
   impact 0.8
   title 'Ensure EXECUTE on UTL_INADDR is revoked from PUBLIC'
   desc 'UTL_INADDR can be used for network reconnaissance.'
@@ -648,7 +651,7 @@ control 'oracle-19c-3.14' do
   end
 end
 
-control 'oracle-19c-3.15' do
+control 'oracle-12c-3.15' do
   impact 0.8
   title 'Ensure EXECUTE on DBMS_LDAP is revoked from PUBLIC'
   desc 'DBMS_LDAP can be used for unauthorized LDAP access.'
@@ -661,12 +664,12 @@ control 'oracle-19c-3.15' do
   end
 end
 
-control 'oracle-19c-3.16' do
+control 'oracle-12c-3.16' do
   impact 0.8
   title 'Ensure EXECUTE on DBMS_ADVISOR is revoked from PUBLIC'
   desc 'DBMS_ADVISOR can expose sensitive tuning information.'
   tag cis: '3.16'
-  tag cis_level: 1
+  tag cis_level: 2
   tag severity: 'high'
 
   describe sql.query("SELECT TRIM(COUNT(*)) AS cnt FROM dba_tab_privs WHERE grantee = 'PUBLIC' AND privilege = 'EXECUTE' AND table_name = 'DBMS_ADVISOR'").row(0).column('cnt') do
@@ -674,7 +677,7 @@ control 'oracle-19c-3.16' do
   end
 end
 
-control 'oracle-19c-3.17' do
+control 'oracle-12c-3.17' do
   impact 1.0
   title 'Ensure DBA role is not granted to unauthorized users'
   desc 'DBA role grants full database privileges and should be restricted.'
@@ -687,7 +690,7 @@ control 'oracle-19c-3.17' do
   end
 end
 
-control 'oracle-19c-3.18' do
+control 'oracle-12c-3.18' do
   impact 1.0
   title 'Ensure SELECT ANY TABLE is not granted to unauthorized users'
   desc 'SELECT ANY TABLE allows reading any table in the database.'
@@ -700,7 +703,7 @@ control 'oracle-19c-3.18' do
   end
 end
 
-control 'oracle-19c-3.19' do
+control 'oracle-12c-3.19' do
   impact 1.0
   title 'Ensure INSERT ANY TABLE is not granted to unauthorized users'
   desc 'INSERT ANY TABLE allows inserting into any table in the database.'
@@ -713,7 +716,7 @@ control 'oracle-19c-3.19' do
   end
 end
 
-control 'oracle-19c-3.20' do
+control 'oracle-12c-3.20' do
   impact 1.0
   title 'Ensure UPDATE ANY TABLE is not granted to unauthorized users'
   desc 'UPDATE ANY TABLE allows updating any table in the database.'
@@ -726,7 +729,7 @@ control 'oracle-19c-3.20' do
   end
 end
 
-control 'oracle-19c-3.21' do
+control 'oracle-12c-3.21' do
   impact 1.0
   title 'Ensure DELETE ANY TABLE is not granted to unauthorized users'
   desc 'DELETE ANY TABLE allows deleting from any table in the database.'
@@ -739,7 +742,7 @@ control 'oracle-19c-3.21' do
   end
 end
 
-control 'oracle-19c-3.22' do
+control 'oracle-12c-3.22' do
   impact 1.0
   title 'Ensure CREATE ANY PROCEDURE is not granted to unauthorized users'
   desc 'CREATE ANY PROCEDURE allows code execution in any schema.'
@@ -752,7 +755,7 @@ control 'oracle-19c-3.22' do
   end
 end
 
-control 'oracle-19c-3.23' do
+control 'oracle-12c-3.23' do
   impact 1.0
   title 'Ensure ALTER SYSTEM is not granted to unauthorized users'
   desc 'ALTER SYSTEM allows modification of database configuration.'
@@ -765,7 +768,7 @@ control 'oracle-19c-3.23' do
   end
 end
 
-control 'oracle-19c-3.24' do
+control 'oracle-12c-3.24' do
   impact 1.0
   title 'Ensure CREATE USER is not granted to unauthorized users'
   desc 'CREATE USER allows creating new database users.'
@@ -778,7 +781,7 @@ control 'oracle-19c-3.24' do
   end
 end
 
-control 'oracle-19c-3.25' do
+control 'oracle-12c-3.25' do
   impact 1.0
   title 'Ensure DROP USER is not granted to unauthorized users'
   desc 'DROP USER allows removing database users.'
@@ -791,7 +794,7 @@ control 'oracle-19c-3.25' do
   end
 end
 
-control 'oracle-19c-3.26' do
+control 'oracle-12c-3.26' do
   impact 1.0
   title 'Ensure proxy users do not have administrative privileges'
   desc 'Proxy users should not have DBA or administrative privileges.'
@@ -804,7 +807,7 @@ control 'oracle-19c-3.26' do
   end
 end
 
-control 'oracle-19c-3.27' do
+control 'oracle-12c-3.27' do
   impact 1.0
   title 'Ensure SYS.USER$ table access is restricted'
   desc 'Password hashes should not be accessible to regular users.'
@@ -819,9 +822,10 @@ end
 
 # ==============================================================================
 # Section 4: Auditing
+# CIS Oracle Database 12c Benchmark - Audit Configuration
 # ==============================================================================
 
-control 'oracle-19c-4.01' do
+control 'oracle-12c-4.01' do
   impact 1.0
   title 'Ensure Oracle audit trail is enabled'
   desc 'Oracle database should have audit trail enabled for security compliance.'
@@ -834,10 +838,10 @@ control 'oracle-19c-4.01' do
   end
 end
 
-control 'oracle-19c-4.02' do
+control 'oracle-12c-4.02' do
   impact 1.0
   title 'Ensure unified auditing is enabled'
-  desc 'Oracle 19c should use unified auditing for comprehensive audit trail.'
+  desc 'Oracle 12c should use unified auditing for comprehensive audit trail.'
   tag cis: '4.2'
   tag cis_level: 1
   tag severity: 'critical'
@@ -847,7 +851,7 @@ control 'oracle-19c-4.02' do
   end
 end
 
-control 'oracle-19c-4.03' do
+control 'oracle-12c-4.03' do
   impact 1.0
   title 'Ensure logon and logoff actions are audited'
   desc 'Auditing logon/logoff helps detect unauthorized access attempts.'
@@ -860,7 +864,7 @@ control 'oracle-19c-4.03' do
   end
 end
 
-control 'oracle-19c-4.04' do
+control 'oracle-12c-4.04' do
   impact 1.0
   title 'Ensure GRANT and REVOKE actions are audited'
   desc 'Auditing privilege changes helps detect unauthorized modifications.'
@@ -873,7 +877,7 @@ control 'oracle-19c-4.04' do
   end
 end
 
-control 'oracle-19c-4.05' do
+control 'oracle-12c-4.05' do
   impact 1.0
   title 'Ensure ALTER SYSTEM is audited'
   desc 'Auditing system changes helps detect unauthorized modifications.'
@@ -886,7 +890,7 @@ control 'oracle-19c-4.05' do
   end
 end
 
-control 'oracle-19c-4.06' do
+control 'oracle-12c-4.06' do
   impact 1.0
   title 'Ensure USER management is audited'
   desc 'Auditing user management helps detect unauthorized account changes.'
@@ -899,7 +903,7 @@ control 'oracle-19c-4.06' do
   end
 end
 
-control 'oracle-19c-4.07' do
+control 'oracle-12c-4.07' do
   impact 0.8
   title 'Ensure ROLE management is audited'
   desc 'Auditing role management helps detect unauthorized privilege changes.'
@@ -912,12 +916,12 @@ control 'oracle-19c-4.07' do
   end
 end
 
-control 'oracle-19c-4.08' do
+control 'oracle-12c-4.08' do
   impact 0.8
   title 'Ensure DDL statements are audited'
   desc 'Auditing DDL helps track schema changes.'
   tag cis: '4.8'
-  tag cis_level: 1
+  tag cis_level: 2
   tag severity: 'high'
 
   describe sql.query("SELECT TRIM(COUNT(*)) AS cnt FROM dba_stmt_audit_opts WHERE audit_option IN ('CREATE TABLE', 'ALTER TABLE', 'DROP TABLE', 'CREATE INDEX', 'DROP INDEX')").row(0).column('cnt') do
@@ -925,7 +929,7 @@ control 'oracle-19c-4.08' do
   end
 end
 
-control 'oracle-19c-4.09' do
+control 'oracle-12c-4.09' do
   impact 0.8
   title 'Ensure database link actions are audited'
   desc 'Auditing database links helps track remote connectivity.'
@@ -938,12 +942,12 @@ control 'oracle-19c-4.09' do
   end
 end
 
-control 'oracle-19c-4.10' do
+control 'oracle-12c-4.10' do
   impact 0.8
   title 'Ensure procedure and function changes are audited'
   desc 'Auditing code changes helps track application modifications.'
   tag cis: '4.10'
-  tag cis_level: 1
+  tag cis_level: 2
   tag severity: 'high'
 
   describe sql.query("SELECT TRIM(COUNT(*)) AS cnt FROM dba_stmt_audit_opts WHERE audit_option IN ('PROCEDURE', 'CREATE PROCEDURE', 'DROP PROCEDURE')").row(0).column('cnt') do
@@ -951,7 +955,7 @@ control 'oracle-19c-4.10' do
   end
 end
 
-control 'oracle-19c-4.11' do
+control 'oracle-12c-4.11' do
   impact 0.8
   title 'Ensure profile changes are audited'
   desc 'Auditing profile changes helps track security policy modifications.'
@@ -964,7 +968,7 @@ control 'oracle-19c-4.11' do
   end
 end
 
-control 'oracle-19c-4.12' do
+control 'oracle-12c-4.12' do
   impact 0.7
   title 'Ensure audit trail is protected'
   desc 'The audit trail should be protected from unauthorized modification.'
@@ -979,9 +983,10 @@ end
 
 # ==============================================================================
 # Section 5: Network Configuration
+# CIS Oracle Database 12c Benchmark - Network Security
 # ==============================================================================
 
-control 'oracle-19c-5.01' do
+control 'oracle-12c-5.01' do
   impact 0.8
   title 'Ensure SEC_MAX_FAILED_LOGIN_ATTEMPTS is configured'
   desc 'Limits failed login attempts before account lockout.'
@@ -994,7 +999,7 @@ control 'oracle-19c-5.01' do
   end
 end
 
-control 'oracle-19c-5.02' do
+control 'oracle-12c-5.02' do
   impact 0.7
   title 'Ensure external procedures are restricted'
   desc 'External procedures can execute OS commands and should be restricted.'
@@ -1007,12 +1012,12 @@ control 'oracle-19c-5.02' do
   end
 end
 
-control 'oracle-19c-5.03' do
+control 'oracle-12c-5.03' do
   impact 0.7
   title 'Ensure dispatchers are properly configured'
   desc 'Shared server dispatchers should be minimized.'
   tag cis: '5.3'
-  tag cis_level: 1
+  tag cis_level: 2
   tag severity: 'high'
 
   describe sql.query("SELECT value FROM v$parameter WHERE name = 'dispatchers'").row(0).column('value') do
@@ -1022,9 +1027,10 @@ end
 
 # ==============================================================================
 # Section 6: Password Management
+# CIS Oracle Database 12c Benchmark - Password Policies
 # ==============================================================================
 
-control 'oracle-19c-6.01' do
+control 'oracle-12c-6.01' do
   impact 1.0
   title 'Ensure password verification function is enabled'
   desc 'Oracle should enforce strong password policies.'
@@ -1037,7 +1043,7 @@ control 'oracle-19c-6.01' do
   end
 end
 
-control 'oracle-19c-6.02' do
+control 'oracle-12c-6.02' do
   impact 0.7
   title 'Ensure case-sensitive logon is enabled'
   desc 'Oracle should enforce case-sensitive passwords.'
@@ -1050,7 +1056,7 @@ control 'oracle-19c-6.02' do
   end
 end
 
-control 'oracle-19c-6.03' do
+control 'oracle-12c-6.03' do
   impact 0.9
   title 'Ensure password expiration is configured'
   desc 'Passwords should expire to enforce regular password changes.'
@@ -1063,7 +1069,7 @@ control 'oracle-19c-6.03' do
   end
 end
 
-control 'oracle-19c-6.04' do
+control 'oracle-12c-6.04' do
   impact 0.9
   title 'Ensure failed login attempts are limited'
   desc 'Accounts should be locked after failed login attempts.'
@@ -1076,7 +1082,7 @@ control 'oracle-19c-6.04' do
   end
 end
 
-control 'oracle-19c-6.05' do
+control 'oracle-12c-6.05' do
   impact 0.8
   title 'Ensure PASSWORD_LOCK_TIME is set appropriately'
   desc 'Locks accounts for a specified period after failed login attempts.'
@@ -1089,7 +1095,7 @@ control 'oracle-19c-6.05' do
   end
 end
 
-control 'oracle-19c-6.06' do
+control 'oracle-12c-6.06' do
   impact 0.7
   title 'Ensure PASSWORD_GRACE_TIME is set appropriately'
   desc 'Limits grace period for password expiration.'
@@ -1102,7 +1108,7 @@ control 'oracle-19c-6.06' do
   end
 end
 
-control 'oracle-19c-6.07' do
+control 'oracle-12c-6.07' do
   impact 0.8
   title 'Ensure PASSWORD_REUSE_MAX is set appropriately'
   desc 'Prevents password reuse for a number of changes.'
@@ -1115,7 +1121,7 @@ control 'oracle-19c-6.07' do
   end
 end
 
-control 'oracle-19c-6.08' do
+control 'oracle-12c-6.08' do
   impact 0.8
   title 'Ensure PASSWORD_REUSE_TIME is set appropriately'
   desc 'Prevents password reuse within a time period.'
@@ -1128,7 +1134,7 @@ control 'oracle-19c-6.08' do
   end
 end
 
-control 'oracle-19c-6.09' do
+control 'oracle-12c-6.09' do
   impact 0.5
   title 'Ensure SESSIONS_PER_USER is set appropriately'
   desc 'Limits concurrent sessions per user.'
@@ -1141,7 +1147,7 @@ control 'oracle-19c-6.09' do
   end
 end
 
-control 'oracle-19c-6.10' do
+control 'oracle-12c-6.10' do
   impact 0.5
   title 'Ensure IDLE_TIME is set appropriately'
   desc 'Disconnects idle sessions to free resources.'
@@ -1156,14 +1162,15 @@ end
 
 # ==============================================================================
 # Section 7: Encryption
+# CIS Oracle Database 12c Benchmark - Data Protection
 # ==============================================================================
 
-control 'oracle-19c-7.01' do
+control 'oracle-12c-7.01' do
   impact 0.8
   title 'Ensure TDE tablespace encryption is considered'
   desc 'Transparent Data Encryption protects data at rest.'
   tag cis: '7.1'
-  tag cis_level: 1
+  tag cis_level: 2
   tag severity: 'high'
 
   describe sql.query("SELECT TRIM(COUNT(*)) AS cnt FROM v$encryption_wallet WHERE status = 'OPEN'") do
@@ -1171,12 +1178,12 @@ control 'oracle-19c-7.01' do
   end
 end
 
-control 'oracle-19c-7.02' do
+control 'oracle-12c-7.02' do
   impact 0.8
   title 'Ensure encrypted tablespaces exist for sensitive data'
   desc 'Sensitive data should be stored in encrypted tablespaces.'
   tag cis: '7.2'
-  tag cis_level: 1
+  tag cis_level: 2
   tag severity: 'high'
 
   describe sql.query("SELECT TRIM(COUNT(*)) AS cnt FROM dba_tablespaces WHERE encrypted = 'YES'").row(0).column('cnt') do
@@ -1184,12 +1191,12 @@ control 'oracle-19c-7.02' do
   end
 end
 
-control 'oracle-19c-7.03' do
+control 'oracle-12c-7.03' do
   impact 0.8
   title 'Ensure network encryption is configured'
   desc 'Network traffic should be encrypted to protect data in transit.'
   tag cis: '7.3'
-  tag cis_level: 1
+  tag cis_level: 2
   tag severity: 'high'
 
   describe sql.query("SELECT value FROM v$parameter WHERE name = 'sec_protocol_error_trace_action'").row(0).column('value') do
@@ -1199,9 +1206,10 @@ end
 
 # ==============================================================================
 # Section 8: Listener Security
+# CIS Oracle Database 12c Benchmark - Listener Configuration
 # ==============================================================================
 
-control 'oracle-19c-8.01' do
+control 'oracle-12c-8.01' do
   impact 0.7
   title 'Ensure listener logging is configured'
   desc 'Listener logging helps track connection attempts.'
@@ -1214,12 +1222,12 @@ control 'oracle-19c-8.01' do
   end
 end
 
-control 'oracle-19c-8.02' do
+control 'oracle-12c-8.02' do
   impact 0.7
   title 'Ensure database links are documented'
   desc 'Database links should be documented and reviewed periodically.'
   tag cis: '8.2'
-  tag cis_level: 1
+  tag cis_level: 2
   tag severity: 'high'
 
   describe sql.query("SELECT TRIM(COUNT(*)) AS cnt FROM dba_db_links").row(0).column('cnt') do
@@ -1227,7 +1235,7 @@ control 'oracle-19c-8.02' do
   end
 end
 
-control 'oracle-19c-8.03' do
+control 'oracle-12c-8.03' do
   impact 0.7
   title 'Ensure PUBLIC database links do not exist'
   desc 'PUBLIC database links allow all users to access remote databases.'
